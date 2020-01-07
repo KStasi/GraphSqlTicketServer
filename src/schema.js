@@ -15,8 +15,9 @@ const typeDefs = gql`
     type Mutation {
       createTicket(theatre: String!, place: Int!, price: Int!): Ticket
       createUser(firstName: String!, lastName: String!, email: String, phone: String): User
-      createBooking(ticket: ID!, bought: Int): Booking
-      cancelBooking(bookingId: ID!): BookingUpdateResponse!
+      createBooking(ticket: ID!): Booking
+      buyTicket(ticket: ID!): Boolean!
+      cancelBooking(id: ID!): Boolean!
       login(email: String): String
     }
 
@@ -40,6 +41,7 @@ const typeDefs = gql`
       theatre: String!
       place: Int!
       price: Int!
+      booked: Boolean!
     }
 
     type BookingUpdateResponse {
