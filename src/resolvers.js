@@ -22,7 +22,9 @@ module.exports = {
             dataSources.serviceAPI.createTicket({ theatre, place, price }),
         createUser: (_, {firstName, lastName, email, phone} , { dataSources }) => 
             dataSources.serviceAPI.createUser({ firstName, lastName, email, phone }),
-        createBooking: (_, { user, ticket, bought } , { dataSources }) => 
-            dataSources.serviceAPI.createBooking({ user, ticket, bought }),
+        createBooking: (_, { ticket, bought } , { dataSources }) => 
+            dataSources.serviceAPI.createBooking({ ticket, bought }),
+        login: (_, { email } , { dataSources }) => 
+            dataSources.serviceAPI.login({ email }),
       },
 };

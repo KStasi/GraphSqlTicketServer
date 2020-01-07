@@ -17,8 +17,12 @@ mutation {
 
 mutation {
   createBooking(user: 1, 
-    ticket: 1, 
+    ticket: 2, 
     bought: 0) {
     id
   }
 }
+
+TODO:
+- add booked for ticket,
+- reject booking for booked

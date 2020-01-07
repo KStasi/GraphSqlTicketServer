@@ -6,6 +6,9 @@ class ServiceAPI extends DataSource {
     super();
     this.store = createDb();
   }
+  initialize(config) {
+    this.context = config.context;
+  }
 
   bookingReducer(booking) {
     return {
@@ -63,13 +66,22 @@ class ServiceAPI extends DataSource {
     return tickets && tickets[0] ? tickets[0] : null;
   }
 
-  async createBooking({ user, ticket, bought }) {
+  async createBooking({ ticket, bought }) {
+    if (!this.context.user) return null;
+    const user = this.context.user.id;
     const bookings = await this.store.bookings.findOrCreate({ where: { user, ticket, bought } });
     return bookings && bookings[0] ? bookings[0] : null;
   }
 
+  async login({ email }) {
+    const user = this.store.users.findOrCreateUser({ email });
+    if (user) return new Buffer(email).toString('base64');
+}
+
   async cancelBooking({ id }) {
-    return !!this.store.bookings.destroy({ where: { id } });
+    if (!this.context.user) return null;
+    const user = this.context.user.id;
+    return !!this.store.bookings.destroy({ where: { id, user } });
   }
 }
 

@@ -15,9 +15,9 @@ const typeDefs = gql`
     type Mutation {
       createTicket(theatre: String!, place: Int!, price: Int!): Ticket
       createUser(firstName: String!, lastName: String!, email: String, phone: String): User
-      createBooking(user: ID!, ticket: ID!, bought: Int): Booking
-      bookTicket(TicketId: ID!): BookingUpdateResponse!
+      createBooking(ticket: ID!, bought: Int): Booking
       cancelBooking(bookingId: ID!): BookingUpdateResponse!
+      login(email: String): String
     }
 
     type User {
